@@ -4,117 +4,553 @@
     </div>
 </header>
 <main>
-    <section>
-        <div class="grid">
-            <div class="col-6 col-offset-3 card-separation">
-                <p-card header="Datos Personales" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
-                    <div class="fields-in-column">
-                        <div class="title-field">
-                            <label class="label-properties">Nombre completo</label>
-                            <input type="text" pInputText />
-                        </div>
-                    </div>
-                </p-card>
-            </div>
+    <form novalidate [formGroup]="formulario" (ngSubmit)="onSubmit($event)">
+        <section>
+            <div class="grid">
+                <div class="col-6 col-offset-3 card-separation">
+                    <p-card header="Datos Personales" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
+                        <div class="fields-in-column">
 
-            <div class="col-6 col-offset-3 card-separation">
-                <p-card header="Documentación" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
-                    <div class="fields-in-column">
-                        <div class="title-field">
-                            <label class="label-properties">Nombre completo</label>
-                            <input type="text" pInputText />
-                        </div>
-                    </div>
-                </p-card>
-            </div>
+                            <!-- Nombre completo -->
+                            <div class="title-field">
+                                <label class="label-properties">Nombre completo</label>
+                                <input type="text" formControlName="nombreCompleto" pInputText />
+                            </div>
 
-            <div class="col-6 col-offset-3 card-separation">
-                <p-card header="Estado de Salud y Hábitos Personales" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
-                    <div class="fields-in-column">
-                        <div class="title-field">
-                            <label class="label-properties">Nombre completo</label>
-                            <input type="text" pInputText />
-                        </div>
-                    </div>
-                </p-card>
-            </div>
+                            <!-- Edad -->
+                            <div class="title-field">
+                                <label class="label-properties">Edad</label>
+                                <input type="text" formControlName="edad" pInputText />
+                            </div>
 
-            <div class="col-6 col-offset-3 card-separation">
-                <p-card header="Datos Familiares" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
-                    <div class="fields-in-column">
-                        <div class="title-field">
-                            <label class="label-properties">Nombre completo</label>
-                            <input type="text" pInputText />
-                        </div>
-                    </div>
-                </p-card>
-            </div>
+                            <!-- Teléfono -->
+                            <div class="title-field">
+                                <label class="label-properties">Teléfono</label>
+                                <input type="text" formControlName="telefono" pInputText />
+                            </div>
 
-            <div class="col-6 col-offset-3 card-separation">
-                <p-card header="Escolaridad" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
-                    <div class="fields-in-column">
-                        <div class="title-field">
-                            <label class="label-properties">Nombre completo</label>
-                            <input type="text" pInputText />
-                        </div>
-                    </div>
-                </p-card>
-            </div>
+                            <!-- Sexo -->
+                            <div class="title-field">
+                                <label class="label-properties">Sexo</label>
+                                <div class="radio-rows">
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="sexo" value="Hombre" label="Hombre" formControlName="sexo">
+                                    </p-radioButton>
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="sexo" value="Mujer" label="Mujer" formControlName="sexo">
+                                    </p-radioButton>
+                                </div>
+                            </div>
 
-            <div class="col-6 col-offset-3 card-separation">
-                <p-card header="Conocimientos Generales" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
-                    <div class="fields-in-column">
-                        <div class="title-field">
-                            <label class="label-properties">Nombre completo</label>
-                            <input type="text" pInputText />
-                        </div>
-                    </div>
-                </p-card>
-            </div>
+                            <!-- Fecha de nacimiento -->
+                            <div class="title-field">
+                                <label class="label-properties">Fecha de nacimiento</label>
+                                <!-- <input type="date" formControlName="fechaNacimiento" pInputText /> -->
+                                <p-calendar formControlName="fechaNacimiento" placeholder="dd/mm/yyyy" dateFormat="dd/mm/yy" [monthNavigator]="true" [yearNavigator]="true" yearRange="1960:2030" [showIcon]="true">
+                                </p-calendar>
+                            </div>
 
-            <div class="col-6 col-offset-3 card-separation">
-                <p-card header="Empleo Actual y Anteriores" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
-                    <div class="fields-in-column">
-                        <div class="title-field">
-                            <label class="label-properties">Nombre completo</label>
-                            <input type="text" pInputText />
-                        </div>
-                    </div>
-                </p-card>
-            </div>
+                            <!-- Nacionalidad -->
+                            <div class="title-field">
+                                <label class="label-properties">Nacionalidad</label>
+                                <input type="text" formControlName="nacionalidad" pInputText />
+                            </div>
 
-            <div class="col-6 col-offset-3 card-separation">
-                <p-card header="Referencias Personales" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
-                    <div class="fields-in-column">
-                        <div class="title-field">
-                            <label class="label-properties">Nombre completo</label>
-                            <input type="text" pInputText />
-                        </div>
-                    </div>
-                </p-card>
-            </div>
+                            <!-- Estatura -->
+                            <div class="title-field">
+                                <label class="label-properties">Estatura (en mts)</label>
+                                <input type="text" formControlName="estatura" pInputText />
+                            </div>
 
-            <div class="col-6 col-offset-3 card-separation">
-                <p-card header="Datos Generales" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
-                    <div class="fields-in-column">
-                        <div class="title-field">
-                            <label class="label-properties">Nombre completo</label>
-                            <input type="text" pInputText />
+                            <!-- Peso -->
+                            <div class="title-field">
+                                <label class="label-properties">Peso (en kgs)</label>
+                                <input type="text" formControlName="peso" pInputText />
+                            </div>
+
+                            <!-- Estado civil -->
+                            <div class="title-field">
+                                <label class="label-properties">Estado civil</label>
+                                <div class="radio-rows">
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="estadocivil" value="Soltero" label="Soltero"
+                                        formControlName="estadoCivil"></p-radioButton>
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="estadocivil" value="Casado" label="Casado"
+                                        formControlName="estadoCivil"></p-radioButton>
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="estadocivil" value="Otro" label="Otro" formControlName="estadoCivil">
+                                    </p-radioButton>
+                                </div>
+                            </div>
+
+                            <!-- Domicilio -->
+                            <!-- Domicilio > Direccion -->
+                            <div class="" formGroupName="domicilio">
+                                <div class="title-field">
+                                    <label class="label-properties">Dirección</label>
+                                    <input type="text" formControlName="direccion" pInputText />
+                                </div>
+
+                                <!-- Domicilio > Colonia -->
+                                <div class="title-field">
+                                    <label class="label-properties">Colonia</label>
+                                    <input type="text" formControlName="colonia" pInputText />
+                                </div>
+
+                                <!-- Domicilio > Código Postal -->
+                                <div class="title-field">
+                                    <label class="label-properties">Código Postal</label>
+                                    <input type="text" formControlName="cp" pInputText />
+                                </div>
+
+                                <!-- Domicilio > Municipio -->
+                                <div class="title-field">
+                                    <label class="label-properties">Municipio</label>
+                                    <input type="text" formControlName="municipio" pInputText />
+                                </div>
+
+                                <!-- Domicilio > Estado -->
+                                <div class="title-field">
+                                    <label class="label-properties">Estado</label>
+                                    <input type="text" formControlName="estado" pInputText />
+                                </div>
+                            </div>
+
+                            <!-- Lugar de Nacimiento -->
+                            <div class="title-field">
+                                <label class="label-properties">Lugar de Nacimiento</label>
+                                <input type="text" formControlName="lugarNacimiento" pInputText />
+                            </div>
+
+                            <!-- Vive con -->
+                            <div class="title-field">
+                                <label class="label-properties">Vive con</label>
+                                <div class="radio-rows">
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="vivecon" value="Sus padres" label="Sus padres"
+                                        formControlName="viveCon">
+                                    </p-radioButton>
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="vivecon" value="Su familia" label="Su familia"
+                                        formControlName="viveCon">
+                                    </p-radioButton>
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="vivecon" value="Parientes" label="Parientes"
+                                        formControlName="viveCon">
+                                    </p-radioButton>
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="vivecon" value="Solo" label="Solo"
+                                        formControlName="viveCon">
+                                    </p-radioButton>
+                                </div>
+                            </div>
+
+                            <!-- Personas que dependen de usted -->
+                            <div class="title-field">
+                                <label class="label-properties">Personas que dependen de usted</label>
+                                <div class="radio-rows">
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="personasdependientes" value="Hijos" label="Hijos"
+                                        formControlName="personasDependientes">
+                                    </p-radioButton>
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="personasdependientes" value="Cónyuge" label="Cónyuge"
+                                        formControlName="personasDependientes">
+                                    </p-radioButton>
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="personasdependientes" value="Padres" label="Padres"
+                                        formControlName="personasDependientes">
+                                    </p-radioButton>
+                                    <p-radioButton class="radio-properties default-font--properties__normal"
+                                        groupname="personasdependientes" value="Otros" label="Otros"
+                                        formControlName="personasDependientes">
+                                    </p-radioButton>
+                                    
+                                </div>
+                            </div>
+
+                            <!-- x -->
+                            <!-- <div class="title-field">
+                                <label class="label-properties">x</label>
+                                <input type="text" formControlName="x" pInputText />
+                            </div> -->
                         </div>
-                    </div>
-                </p-card>
-            </div>
-            
-            <div class="col-6 col-offset-3 card-separation">
-                <p-card header="Datos Económicos" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
-                    <div class="fields-in-column">
-                        <div class="title-field">
-                            <label class="label-properties">Nombre completo</label>
-                            <input type="text" pInputText />
+                    </p-card>
+                </div>
+
+                <div class="col-6 col-offset-3 card-separation">
+                    <p-card header="Documentación" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
+                        <div class="fields-in-column">
+
+                            <!-- Documentación -->
+                            <div class="" formGroupName="documentacion">
+                                <!-- CURP -->
+                                <div class="title-field">
+                                    <label class="label-properties">Clave Única de Registro de Población (CURP)</label>
+                                    <p-inputMask formControlName="curp" mask="aaaa999999aaaaaa99"></p-inputMask>
+                                </div>
+
+                                <!-- Afore -->
+                                <div class="title-field">
+                                    <label class="label-properties">AFORE</label>
+                                    <input type="text" formControlName="afore" pInputText />
+                                </div>
+
+                                <!-- RFC -->
+                                <div class="title-field">
+                                    <label class="label-properties">Registro Federal de Contribuyentes</label>
+                                    <input type="text" formControlName="rfc" maxlength="12" pInputText />
+                                </div>
+
+                                <!-- NSS -->
+                                <div class="title-field">
+                                    <label class="label-properties">Número de Seguridad Social</label>
+                                    <p-inputMask formControlName="nss" mask="999999999999"></p-inputMask>
+                                </div>
+
+                                <!-- Cartilla -->
+                                <div class="title-field">
+                                    <label class="label-properties">Cartilla de Servicio Militar No.</label>
+                                    <input type="text" formControlName="cartilla" maxlength="12" pInputText />
+                                </div>
+
+                                <!-- Pasaporte -->
+                                <div class="title-field">
+                                    <label class="label-properties">Pasaporte No.</label>
+                                    <input type="text" formControlName="pasaporte" maxlength="12" pInputText />
+                                </div>
+
+                                <!-- Licencia -->
+                                <div class="title-field">
+                                    <label class="label-properties">¿Tiene licencia de manejo?</label>
+                                    <div class="radio-rows">
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="optLicencia" value="Sí" label="Sí"
+                                            formControlName="licencia">
+                                        </p-radioButton>
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="optLicencia" value="No" label="No"
+                                            formControlName="licencia">
+                                        </p-radioButton>
+                                    </div>
+                                </div>
+
+                                <!-- Clase Licencia -->
+                                <div class="title-field">
+                                    <label class="label-properties">Clase Licencia</label>
+                                    <div class="radio-rows">
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="cLicencia" value="A" label="A"
+                                            formControlName="claseLicencia">
+                                        </p-radioButton>
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="cLicencia" value="B" label="B"
+                                            formControlName="claseLicencia">
+                                        </p-radioButton>
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="cLicencia" value="C" label="C"
+                                            formControlName="claseLicencia">
+                                        </p-radioButton>
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="cLicencia" value="D" label="D"
+                                            formControlName="claseLicencia">
+                                        </p-radioButton>
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="cLicencia" value="E" label="E"
+                                            formControlName="claseLicencia">
+                                        </p-radioButton>
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="cLicencia" value="E1" label="E1"
+                                            formControlName="claseLicencia">
+                                        </p-radioButton>
+                                    </div>
+                                </div>
+
+                                <!-- Número Licencia -->
+                                <div class="title-field">
+                                    <label class="label-properties">Número Licencia</label>
+                                    <p-inputMask formControlName="numLicencia" mask="999999999999"></p-inputMask>
+                                </div>
+
+                                <!-- Preguntar si la persona es extranjera; En caso de serlo mostrar el campo "Docs Extranjero",
+                                en caso contrario no mostrar el campo -->
+
+                                <!-- Docs Extranjero -->
+                                <div class="title-field">
+                                    <label class="label-properties">Documentos que le permiten trabajar en el país siendo extranjero</label>
+                                    <p-chips formControlName="docExtranjera"></p-chips>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                </p-card>
+                    </p-card>
+                </div>
+
+                <div class="col-6 col-offset-3 card-separation">
+                    <p-card header="Estado de Salud y Hábitos Personales"
+                        [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
+                        <div class="fields-in-column">
+                            
+                            <!-- Salud y Hábitos -->
+                            <div class="" formGroupName="saludYHabitos">
+
+                                <!-- Salud actual -->
+                                <div class="title-field">
+                                    <label class="label-properties">¿Cómo considera su estado de salud actual?</label>
+                                    <div class="radio-rows">
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="saludActual" value="Bueno" label="Bueno"
+                                            formControlName="estadoSaludActual">
+                                        </p-radioButton>
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="saludActual" value="Regular" label="Regular"
+                                            formControlName="estadoSaludActual">
+                                        </p-radioButton>
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="saludActual" value="Malo" label="Malo"
+                                            formControlName="estadoSaludActual">
+                                        </p-radioButton>
+                                    </div>
+                                </div>
+
+                                <!-- Enfermedad crónica -->
+                                <div class="title-field">
+                                    <label class="label-properties">¿Padece alguna enfermedad crónica?</label>
+                                    <div class="radio-rows">
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="enfCronica" value="No" label="No"
+                                            formControlName="enfermedadCronica">
+                                        </p-radioButton>
+                                        <p-radioButton class="radio-properties default-font--properties__normal"
+                                            groupname="enfCronica" value="Sí" label="Sí"
+                                            formControlName="enfermedadCronica">
+                                        </p-radioButton>
+                                    </div>
+                                </div>
+
+                                <!-- Enfermedad Crónica -->
+                                <div class="title-field">
+                                    <label class="label-properties">Enfermedad</label>
+                                    <input type="text" formControlName="nombreEnfermedadCronica" pInputText />
+                                </div>
+
+                                <!-- ¿Practica algún deporte? -->
+                                <div class='title-field'>
+                                    <label class='label-properties'> ¿Practica algún deporte? </label>
+                                    <div class='radio-rows'>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='practDeporte' value='Sí'
+                                            label='Sí' formControlName='deporte'></p-radioButton>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='practDeporte' value='No'
+                                            label='No' formControlName='deporte'></p-radioButton>
+                                    </div>
+                                </div>
+
+                                <!-- Deporte -->
+                                <div class='title-field'>
+                                    <label class='label-properties'> Deporte </label>
+                                    <input type='text' formControlName='nombreDeporte' pInputText />
+                                </div>
+
+                                <!-- ¿Pertenece a algún club social o deportivo? -->
+                                <div class='title-field'>
+                                    <label class='label-properties'> ¿Pertenece a algún club social o deportivo? </label>
+                                    <div class='radio-rows'>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optVive' value='Sí'
+                                            label='Sí' formControlName='club'></p-radioButton>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optVive' value='No'
+                                            label='No' formControlName='club'></p-radioButton>
+                                    </div>
+                                </div>
+
+                                <!-- ¿Cuál es su pasatiempo favorito? -->
+                                <div class='title-field'>
+                                    <label class='label-properties'> ¿Cuál es su pasatiempo favorito? </label>
+                                    <input type='text' formControlName='pasatiempo' pInputText />
+                                </div>
+
+                                <!-- ¿Cuál es su meta en la vida? -->
+                                <div class='title-field'>
+                                    <label class='label-properties'> ¿Cuál es su meta en la vida? </label>
+                                    <input type='text' formControlName='meta' pInputText />
+                                </div>
+                            </div>
+                        </div>
+                    </p-card>
+                </div>
+
+                <div class="col-6 col-offset-3 card-separation">
+                    <p-card header="Datos Familiares" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
+                        <div class="fields-in-column">
+                            
+                            <div class='title-field'>
+                                <div style="margin-bottom: 1%; text-align: right">
+                                    <button pButton pRipple type='button' icon='pi pi-plus' label="Agregar" class='p-button-rounded p-button-primary' (click)="showAddToDataFamily()"></button>
+                                </div>
+                            </div>
+                            
+                            <p-table [columns]="dataFamCols" [value]="dataFamRows" selectionMode="single" [(selection)]="selectedDataFam" (onRowSelect)="onRowSelectDataFamily($event)" [paginator]="false" styleClass="p-datatable-striped">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns">
+                                            {{col.header}}
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr [pSelectableRow]="rowData">
+                                        <td *ngFor="let col of columns">
+                                            {{rowData[col.field]}}
+                                        </td>
+                                    </tr>
+                                </ng-template>    
+                            </p-table>
+
+                        </div>
+                    </p-card>
+
+                    <p-dialog header="Datos del familiar" [(visible)]="displayDataFamilyDialog" showEffect="fade" [modal]="true" [style]="{width: '40%'}">
+                        <div class="fields-in-column">
+                            <div class="" formGroupName="datosFamiliares">
+
+                                <!-- Parentesco -->
+                                <div class='title-field'>
+                                    <label class='label-properties'> Parentesco </label>
+                                    <div class='radio-rows-dialog'>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optParentesco' value='Padre'
+                                            label='Padre' formControlName='parentesco'></p-radioButton>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optParentesco' value='Madre'
+                                            label='Madre' formControlName='parentesco'></p-radioButton>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optParentesco' value='Tío(a)'
+                                            label='Tío(a)' formControlName='parentesco'></p-radioButton>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optParentesco' value='Abuelo(a)'
+                                            label='Abuelo(a)' formControlName='parentesco'></p-radioButton>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optParentesco' value='Hermano(a)'
+                                            label='Hermano(a)' formControlName='parentesco'></p-radioButton>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optParentesco' value='Hijo(a)'
+                                            label='Hija(a)' formControlName='parentesco'></p-radioButton>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optParentesco' value='Esposo(a)'
+                                            label='Esposo(a)' formControlName='parentesco'></p-radioButton>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optParentesco' value='Cónyuge'
+                                            label='Cónyuge' formControlName='parentesco'></p-radioButton>
+                                    </div>
+                                </div>
+    
+                                <!-- Nombre -->
+                                <div class='title-field'>
+                                <label class='label-properties'> Nombre </label>
+                                <input type='text' formControlName='nombre' pInputText />
+                                </div>
+
+                                <!-- Vive -->
+                                <div class='title-field'>
+                                    <label class='label-properties'> Vive </label>
+                                    <div class='radio-rows'>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optVive' value='Sí'
+                                            label='Sí' formControlName='vive'></p-radioButton>
+                                        <p-radioButton class='radio-properties default-font--properties__normal' groupname='optVive' value='No'
+                                            label='No' formControlName='vive'></p-radioButton>
+                                    </div>
+                                </div>
+
+                                <!-- Domicilio -->
+                                <div class='title-field'>
+                                    <label class='label-properties'> Domicilio </label>
+                                    <input type='text' formControlName='domicilio' pInputText />
+                                </div>
+
+                                <!-- Ocupación -->
+                                <div class='title-field'>
+                                    <label class='label-properties'> Ocupación </label>
+                                    <input type='text' formControlName='ocupacion' pInputText />
+                                </div>
+
+                                <div class="title-field">
+                                    <div class="button-row">
+                                        <!-- Guardar -->
+                                        <button pButton pRipple type='button' label="Guardar" class='p-button-rounded p-button-primary' (click)="saveToDataFamily()"></button>
+    
+                                        <!-- Eliminar -->
+                                        <button pButton pRipple type='button' label='Eliminar' class='p-button-rounded p-button-outlined p-button-danger' (click)="deleteFromDataFamily()"></button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </p-dialog>
+                </div>
+
+                <div class="col-6 col-offset-3 card-separation">
+                    <p-card header="Escolaridad" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
+                        <div class="fields-in-column">
+                            <div class="title-field">
+                                <label class="label-properties">Nombre completo</label>
+                                <input type="text" pInputText />
+                            </div>
+                        </div>
+                    </p-card>
+                </div>
+
+                <div class="col-6 col-offset-3 card-separation">
+                    <p-card header="Conocimientos Generales" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
+                        <div class="fields-in-column">
+                            <div class="title-field">
+                                <label class="label-properties">Nombre completo</label>
+                                <input type="text" pInputText />
+                            </div>
+                        </div>
+                    </p-card>
+                </div>
+
+                <div class="col-6 col-offset-3 card-separation">
+                    <p-card header="Empleo Actual y Anteriores"
+                        [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
+                        <div class="fields-in-column">
+                            <div class="title-field">
+                                <label class="label-properties">Nombre completo</label>
+                                <input type="text" pInputText />
+                            </div>
+                        </div>
+                    </p-card>
+                </div>
+
+                <div class="col-6 col-offset-3 card-separation">
+                    <p-card header="Referencias Personales" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
+                        <div class="fields-in-column">
+                            <div class="title-field">
+                                <label class="label-properties">Nombre completo</label>
+                                <input type="text" pInputText />
+                            </div>
+                        </div>
+                    </p-card>
+                </div>
+
+                <div class="col-6 col-offset-3 card-separation">
+                    <p-card header="Datos Generales" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
+                        <div class="fields-in-column">
+                            <div class="title-field">
+                                <label class="label-properties">Nombre completo</label>
+                                <input type="text" pInputText />
+                            </div>
+                        </div>
+                    </p-card>
+                </div>
+
+                <div class="col-6 col-offset-3 card-separation">
+                    <p-card header="Datos Económicos" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
+                        <div class="fields-in-column">
+                            <div class="title-field">
+                                <label class="label-properties">Nombre completo</label>
+                                <input type="text" pInputText />
+                            </div>
+                        </div>
+                    </p-card>
+                </div>
+
+                <div class="col-6 col-offset-3 card-separation">
+                    <button pButton type="submit" label="Validar información"></button>
+                </div>
             </div>
-        </div>        
-    </section>
+        </section>
+    </form>
 </main>
