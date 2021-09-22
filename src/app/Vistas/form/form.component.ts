@@ -6,6 +6,7 @@ import { ManagementService } from 'src/app/Services/management.service';
 
 import { Person } from 'src/app/Models/person';
 import { Datafamily } from 'src/app/Models/datafamily';
+import { Education } from 'src/app/Models/education';
 
 @Component({
   selector: 'app-form',
@@ -24,12 +25,25 @@ export class FormComponent implements OnInit {
   dataFamRows: Datafamily[];
   dataFamCols: any[];
 
+  /* Education */
+  displayDataEducationDialog: boolean;
+  dataEduc: Education;
+  selectedDataEduc: Education;
+  newDataEduc: boolean;
+  dataEducRows: Education[];
+  dataEducCols: any[];
+
   constructor(private management: ManagementService, private fb: FormBuilder, private pngConfig: PrimeNGConfig) {
 
     /* DataFamily */
     this.displayDataFamilyDialog = false;
     this.dataFamRows = [];
     this.newDataFam = false;
+
+    /* Education */
+    this.displayDataEducationDialog = false;
+    this.dataEducRows = [];
+    this.newDataEduc = false;
 
     this.buildForm();
   }
@@ -51,6 +65,14 @@ export class FormComponent implements OnInit {
       { field: 'vive', header: 'Vive' },
       { field: 'domicilio', header: 'Domicilio' },
       { field: 'ocupacion', header: 'Ocupación' },
+    ];
+
+    this.dataEducCols = [
+      { field: 'escolaridad', header: 'Escolaridad' },
+      { field: 'direccion', header: 'Dirección' },
+      { field: 'inicio', header: 'Inicio' },
+      { field: 'fin', header: 'Fin' },
+      { field: 'certificado', header: 'Certificado' }
     ];
   }
 
@@ -104,6 +126,13 @@ export class FormComponent implements OnInit {
         domicilio: [],
         ocupacion: []
       }),
+      educacion: this.fb.group({
+        escolaridad: [],
+        direccion: [],
+        inicio: [],
+        fin: [],
+        certificado: []
+      })
     });
   }
 
@@ -187,5 +216,77 @@ export class FormComponent implements OnInit {
     this.formulario.get('datosFamiliares.domicilio').reset();
     this.formulario.get('datosFamiliares.ocupacion').reset();
   }
+
+  /* Education métodos */
+  showAddToEducation() {
+    this.newDataEduc = true;
+    this.dataEduc = {
+      escolaridad: "",
+      direccion: "",
+      inicio: "",
+      fin: "",
+      certificado: "",
+    };
+    this.cleanEducationFields();
+    this.displayDataEducationDialog = true;
+  }
+
+  saveToEducation() {
+    let pos: number = 0;
+    if (this.newDataEduc) {
+      this.dataEduc = {
+        escolaridad: this.formulario.get('educacion.escolaridad').value,
+        direccion: this.formulario.get('educacion.direccion').value,
+        inicio: this.formulario.get('educacion.inicio').value,
+        fin: this.formulario.get('educacion.fin').value,
+        certificado: this.formulario.get('educacion.certificado').value
+      }
+      this.dataEducRows.push(this.dataEduc);
+    } else {
+      this.dataEduc = {
+        escolaridad: this.formulario.get('educacion.escolaridad').value,
+        direccion: this.formulario.get('educacion.direccion').value,
+        inicio: this.formulario.get('educacion.inicio').value,
+        fin: this.formulario.get('educacion.fin').value,
+        certificado: this.formulario.get('educacion.certificado').value
+      }
+      pos = this.dataEducRows.indexOf(this.selectedDataEduc);
+      this.dataEducRows[pos] = this.dataEduc;
+    }
+
+    this.dataEduc = null;
+    this.displayDataEducationDialog = false;
+  }
+
+  deleteFromEducation() {
+    let index = this.dataEducRows.indexOf(this.selectedDataEduc);
+    this.dataEducRows = this.dataEducRows.filter((val, i) => i != index);
+    this.dataEduc = null;
+    this.displayDataEducationDialog = false;
+  }
+
+  onRowSelectEducation(event: any) {
+    this.newDataEduc = false;
+    this.dataEduc = event.data;
+    this.setEducationFields(this.dataEduc);
+    this.displayDataEducationDialog = true;
+  }
+
+  setEducationFields(fields: Education) {
+    this.formulario.get('educacion.escolaridad').setValue(fields.escolaridad);
+    this.formulario.get('educacion.direccion').setValue(fields.direccion);
+    this.formulario.get('educacion.inicio').setValue(fields.inicio);
+    this.formulario.get('educacion.fin').setValue(fields.fin);
+    this.formulario.get('educacion.certificado').setValue(fields.certificado);
+  }
+
+  cleanEducationFields() {
+    this.formulario.get('educacion.escolaridad').reset();
+    this.formulario.get('educacion.direccion').reset();
+    this.formulario.get('educacion.inicio').reset();
+    this.formulario.get('educacion.fin').reset();
+    this.formulario.get('educacion.certificado').reset();
+  }
+  
 
 }

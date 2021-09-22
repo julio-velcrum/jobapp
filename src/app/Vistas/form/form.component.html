@@ -483,10 +483,89 @@
                 <div class="col-6 col-offset-3 card-separation">
                     <p-card header="Escolaridad" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
                         <div class="fields-in-column">
-                            <div class="title-field">
-                                <label class="label-properties">Nombre completo</label>
-                                <input type="text" pInputText />
+                            
+                            <div class='title-field'>
+                                <div style='margin-bottom: 1%; text-align: right'>
+                                    <button pButton pRipple type='button' icon='pi pi-plus' label='Agregar'
+                                        class='p-button-rounded p-button-primary' (click)='showAddToEducation()'></button>
+                                </div>
                             </div>
+
+                            <p-table [columns]='dataEducCols' [value]='dataEducRows' selectionMode='single' [(selection)]='selectedDataEduc'
+                                (onRowSelect)='onRowSelectEducation($event)' [paginator]='false' styleClass='p-datatable-striped'>
+                                <ng-template pTemplate='header' let-columns>
+                                    <tr>
+                                        <th *ngFor='let col of columns'>
+                                            {{col.header}}
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate='body' let-rowData let-columns='columns'>
+                                    <tr [pSelectableRow]='rowData'>
+                                        <td *ngFor='let col of columns'>
+                                            {{rowData[col.field]}}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+
+                            <p-dialog header='Datos escolares' [(visible)]='displayDataEducationDialog' showEffect='fade' [modal]='true' [style]="{width: '40%'}">
+                                <div class='fields-in-column'>
+                                    <div class='' formGroupName='educacion'>
+                                        <div class='title-field'>
+
+                                            <!-- Nivel de estudios -->
+                                            <div class='title-field'>
+                                                <label class='label-properties'> Nivel de estudios </label>
+                                                <div class='radio-rows-dialog'>
+                                                    <p-radioButton class='radio-properties default-font--properties__normal' groupname='nivelEstudios'
+                                                        value='Primaria' label='Primaria' formControlName='escolaridad'></p-radioButton>
+                                                    <p-radioButton class='radio-properties default-font--properties__normal' groupname='nivelEstudios'
+                                                        value='Secundaria' label='Secundaria' formControlName='escolaridad'></p-radioButton>
+                                                    <p-radioButton class='radio-properties default-font--properties__normal' groupname='nivelEstudios'
+                                                        value='Preparatoria' label='Preparatoria' formControlName='escolaridad'></p-radioButton>
+                                                    <p-radioButton class='radio-properties default-font--properties__normal' groupname='nivelEstudios'
+                                                        value='Universidad' label='Universidad' formControlName='escolaridad'></p-radioButton>
+                                                    <p-radioButton class='radio-properties default-font--properties__normal' groupname='nivelEstudios' value='Otra'
+                                                        label='Otra' formControlName='escolaridad'></p-radioButton>
+                                                </div>
+                                            </div>
+
+                                            <!-- Dirección -->
+                                            <div class='title-field'>
+                                                <label class='label-properties'> Dirección </label>
+                                                <input type='text' formControlName='direccion' pInputText />
+                                            </div>
+
+                                            <!-- Año de Inicio -->
+                                            <div class='title-field'>
+                                                <label class='label-properties'> Año de Inicio </label>
+                                                <p-inputMask formControlName='inicio' mask='9999'></p-inputMask>
+                                            </div>
+                                            
+                                            <!-- Año de Término -->
+                                            <div class='title-field'>
+                                                <label class='label-properties'> Año de Término </label>
+                                                <p-inputMask formControlName='fin' mask='9999'></p-inputMask>
+                                            </div>
+                                            
+                                            <!-- Certificado -->
+                                            <div class='title-field'>
+                                                <label class='label-properties'> Certificado </label>
+                                                <input type='text' formControlName='certificado' pInputText />
+                                            </div>
+
+                                            <div class='button-row'>
+                                                <!-- Guardar -->
+                                                <button pButton pRipple type='button' label='Guardar' class='p-button-rounded p-button-primary' (click)="saveToEducation()"></button>
+                                                <!-- Eliminar -->
+                                                <button pButton pRipple type='button' label='Eliminar' class='p-button-rounded p-button-outlined p-button-danger' (click)="deleteFromEducation()"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p-dialog>
+
                         </div>
                     </p-card>
                 </div>
