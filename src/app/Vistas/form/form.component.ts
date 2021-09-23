@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { PrimeNGConfig } from 'primeng/api';
 
 import { ManagementService } from 'src/app/Services/management.service';
@@ -15,7 +15,7 @@ import { Education } from 'src/app/Models/education';
 })
 export class FormComponent implements OnInit {
 
-  formulario: FormGroup | any;
+  formulario: FormGroup;
 
   /* DataFamily */
   displayDataFamilyDialog: boolean;
@@ -132,7 +132,17 @@ export class FormComponent implements OnInit {
         inicio: [],
         fin: [],
         certificado: []
-      })
+      }),
+      conocimientosGenerales: this.fb.group({
+        idiomas: this.fb.array([
+          //this.fb.control('')
+        ]),
+        porcentajeIdioma: this.fb.array([]),
+        funcionesOficina: [],
+        maquinaTaller: [],
+        software: [],
+        otros: [],
+      }),
     });
   }
 
@@ -287,6 +297,27 @@ export class FormComponent implements OnInit {
     this.formulario.get('educacion.fin').reset();
     this.formulario.get('educacion.certificado').reset();
   }
+
+  /* Conocimientos Generales métodos */
+
+  get idiomas() {
+    return this.formulario.get('conocimientosGenerales.idiomas') as FormArray;
+  }
+
+  get porcentajeIdioma() {
+    return this.formulario.get('conocimientosGenerales.porcentajeIdioma') as FormArray;
+  }
+
+  addIdiomasYPorcentaje() {
+    this.idiomas.push(this.fb.control(''));
+    this.porcentajeIdioma.push(this.fb.control(''));
+  }
+
+  deleteCurrentIdiomaYPorcentaje(posicionActual: number) {
+    this.idiomas.removeAt(posicionActual);
+    this.porcentajeIdioma.removeAt(posicionActual);
+  }
+
   
 
 }

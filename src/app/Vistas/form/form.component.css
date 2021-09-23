@@ -39,6 +39,12 @@
     justify-content: flex-start;
 }
 
+.title-field-inRows {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
 
 .fields-in-column {
     padding-left: 3%;
@@ -78,4 +84,34 @@
 
 .radio-properties {
     margin-right: 6%;
+}
+
+/* Idiomas */
+
+.language-buttonAddLayout {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.language-row {
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.language-label {
+    margin-left: 5%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    font-size: 1.125rem;
+}
+
+.language-deleteButton {
+    margin-left: 1%;
+}
+
+.language-inputtext {
+    margin-left: 1%;
 }

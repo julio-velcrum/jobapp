@@ -573,9 +573,49 @@
                 <div class="col-6 col-offset-3 card-separation">
                     <p-card header="Conocimientos Generales" [style]="{'font-size': '1.3rem', 'font-weight': 'normal'}">
                         <div class="fields-in-column">
-                            <div class="title-field">
-                                <label class="label-properties">Nombre completo</label>
-                                <input type="text" pInputText />
+                            <div class="" formGroupName="conocimientosGenerales">
+
+                                <div formArrayName="idiomas">
+                                    <div style='margin-bottom: 1%; text-align: right'>
+                                        <button pButton pRipple type='button' icon='pi pi-plus' label="Agregar idioma" class='p-button-rounded' (click)='addIdiomasYPorcentaje()'></button>
+                                    </div>
+    
+                                    <div class="">
+                                        <div *ngFor="let idioma of idiomas.controls; let porcentaje of porcentajeIdioma.controls;let i = index" class="language-row">
+                                            <label class="language-label">Idioma {{ i + 1 }}</label>
+                                            <input class="language-inputtext" type="text" [formControlName]="i" maxlength="20" pInputText />
+                                            <label class="language-label">Porcentaje</label>
+                                            <input class="language-inputtext" type="number" [formControlName]="i" maxlength="3" pInputText />
+                                            <!-- Borrar idioma -->
+                                            <button pButton pRipple type='button' icon='pi pi-trash' class='p-button-rounded p-button-danger language-deleteButton' (click)='deleteCurrentIdiomaYPorcentaje(i)'></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Funciones de oficina que domina-->
+                                <div class='title-field'>
+                                    <label class='label-properties'>Funciones de oficina que domina</label>
+                                    <p-chips formControlName='funcionesOficina'></p-chips>
+                                </div>
+
+                                <!--Máquina de oficina o taller que sepa manejar-->
+                                <div class='title-field'>
+                                    <label class='label-properties'>Máquina de oficina o taller que sepa manejar</label>
+                                    <p-chips formControlName='maquinaTaller'></p-chips>
+                                </div>
+
+                                <!--Software que conoce-->
+                                <div class='title-field'>
+                                    <label class='label-properties'>Software que conoce</label>
+                                    <p-chips formControlName='software'></p-chips>
+                                </div>
+
+                                <!--Otros trabajos o funciones que domina-->
+                                <div class='title-field'>
+                                    <label class='label-properties'>Otros trabajos o funciones que domina</label>
+                                    <p-chips formControlName='otros'></p-chips>
+                                </div>
+                                
                             </div>
                         </div>
                     </p-card>
